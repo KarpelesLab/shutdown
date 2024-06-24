@@ -11,4 +11,6 @@ func Wait() {
 			log.Printf("[main] fatal error: %s", err)
 		}
 	}
+
+	runDefer()
 }

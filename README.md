@@ -24,6 +24,11 @@ func launchHttp() {
         shutdown.Fatalf("failed to listen for the http server: %w", err)
         return
     }
+
+    // cleanup of opened listen socket
+    shutdown.Defer(func() {
+        l.Close()
+    })
     // ...
 }
 ```
