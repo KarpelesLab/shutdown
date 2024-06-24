@@ -1,11 +1,19 @@
 package shutdown
 
-import "log/slog"
+import (
+	"log/slog"
+	"sync"
+)
 
-var shutdownChannel = make(chan struct{})
+var (
+	shutdownChannel = make(chan struct{})
+	shutdownOnce    sync.Once
+)
 
 // Shutdown will trigger the normal shutdown of the program
 func Shutdown() {
-	slog.Info("[shutdown] Shutdown requested", "event", "shutdown:request")
-	close(shutdownChannel)
+	shutdownOnce.Do(func() {
+		slog.Info("[shutdown] Shutdown requested", "event", "shutdown:request")
+		close(shutdownChannel)
+	})
 }
