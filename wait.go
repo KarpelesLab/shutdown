@@ -7,6 +7,8 @@ func Wait() {
 	select {
 	case <-shutdownChannel:
 	case err := <-errCh:
-		log.Printf("[main] fatal error: %s", err)
+		if err != nil {
+			log.Printf("[main] fatal error: %s", err)
+		}
 	}
 }

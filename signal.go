@@ -16,7 +16,7 @@ func SetupSignals() {
 
 	go func() {
 		<-c
-		shutdown()
+		Shutdown()
 		<-c
 		os.Exit(1)
 	}()

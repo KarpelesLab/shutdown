@@ -4,7 +4,8 @@ import "log"
 
 var shutdownChannel = make(chan struct{})
 
-func shutdown() {
-	log.Println("[main] shutting down...")
+// Shutdown will trigger the normal shutdown of the program
+func Shutdown() {
+	log.Println("[shutdown] shutting down...")
 	close(shutdownChannel)
 }
