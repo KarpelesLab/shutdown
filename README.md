@@ -22,6 +22,7 @@ func launchHttp() {
     l, err := net.Listen("tcp", ":80")
     if err != nil {
         shutdown.Fatalf("failed to listen for the http server: %w", err)
+        return
     }
     // ...
 }
