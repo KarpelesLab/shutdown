@@ -1,6 +1,9 @@
 package shutdown
 
-import "log"
+import (
+	"fmt"
+	"log/slog"
+)
 
 // Wait will wait until shutdown, or if an error is sent via Fatalf. This function
 // should be called as the last function in main()
@@ -9,7 +12,7 @@ func Wait() {
 	case <-shutdownChannel:
 	case err := <-errCh:
 		if err != nil {
-			log.Printf("[main] fatal error: %s", err)
+			slog.Info(fmt.Sprintf("[shutdown] Shutting down on fatal error: %s", err), "event", "shutdown:fatal")
 		}
 	}
 

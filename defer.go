@@ -1,7 +1,8 @@
 package shutdown
 
 import (
-	"log"
+	"fmt"
+	"log/slog"
 	"slices"
 )
 
@@ -24,7 +25,7 @@ func runDefer() {
 func callDefer(f func()) {
 	defer func() {
 		if e := recover(); e != nil {
-			log.Printf("panic in deferred shutdown function: %s (recovered)", e)
+			slog.Error(fmt.Sprintf("panic in deferred shutdown function: %s (recovered)", e), "event", "shutdown:defer:panic", "category", "go.panic")
 		}
 	}()
 
