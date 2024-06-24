@@ -2,7 +2,8 @@ package shutdown
 
 import "log"
 
-// Wait will wait until shutdown, or if an error is sent via Fatalf
+// Wait will wait until shutdown, or if an error is sent via Fatalf. This function
+// should be called as the last function in main()
 func Wait() {
 	select {
 	case <-shutdownChannel:

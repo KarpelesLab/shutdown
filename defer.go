@@ -1,6 +1,9 @@
 package shutdown
 
-import "log"
+import (
+	"log"
+	"slices"
+)
 
 var deferredFuncs []func()
 
@@ -9,7 +12,10 @@ func Defer(f func()) {
 	deferredFuncs = append(deferredFuncs, f)
 }
 
+// runDefer executes the functions that were registered with Defer in reverse
+// order.
 func runDefer() {
+	slices.Reverse(deferredFuncs)
 	for _, f := range deferredFuncs {
 		callDefer(f)
 	}
