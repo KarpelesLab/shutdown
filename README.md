@@ -7,9 +7,13 @@ Utility library to handle daemons
 ## Usage 
 
 ```go
-import "github.com/KarpelesLab/shutdown"
+import (
+    "net"
 
-func init() {
+    "github.com/KarpelesLab/shutdown"
+)
+
+func main() {
     shutdown.SetupSignals()
 
     // do the things you want to do
