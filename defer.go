@@ -6,9 +6,12 @@ import (
 	"slices"
 )
 
+// deferredFuncs stores functions to be executed during shutdown in LIFO order
 var deferredFuncs []func()
 
-// Defer will register the given function to be run upon program termination
+// Defer registers the given function to be run upon program termination.
+// Functions registered with Defer will be executed in LIFO (Last In, First Out) order
+// when shutdown is triggered.
 func Defer(f func()) {
 	deferredFuncs = append(deferredFuncs, f)
 }
@@ -22,6 +25,8 @@ func runDefer() {
 	}
 }
 
+// callDefer executes a deferred function and recovers from any panics.
+// This ensures that all deferred functions will be called even if some panic.
 func callDefer(f func()) {
 	defer func() {
 		if e := recover(); e != nil {

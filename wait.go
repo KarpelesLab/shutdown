@@ -5,8 +5,10 @@ import (
 	"log/slog"
 )
 
-// Wait will wait until shutdown, or if an error is sent via Fatalf. This function
-// should be called as the last function in main()
+// Wait blocks until shutdown is triggered, either by calling Shutdown(),
+// receiving a termination signal (if SetupSignals was called), or if an error is sent via Fatalf.
+// After the shutdown is triggered, this function runs all cleanup functions registered with Defer().
+// This function should be called as the last function in main().
 func Wait() {
 	select {
 	case <-shutdownChannel:
