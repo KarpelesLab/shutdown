@@ -16,9 +16,12 @@ func Defer(f func()) {
 	deferredFuncs = append(deferredFuncs, f)
 }
 
-// runDefer executes the functions that were registered with Defer in reverse
-// order.
-func runDefer() {
+// RunDefer executes the functions that were registered with Defer in reverse
+// order. You should never call this directly (the proper way is to call shutdown.Wait()
+// in your func main()), but this may be needed in some edge cases such as when
+// performing online updates, allowing for shutdown to happen without exitting the
+// program when performing updates, for example.
+func RunDefer() {
 	slices.Reverse(deferredFuncs)
 	for _, f := range deferredFuncs {
 		callDefer(f)

@@ -18,5 +18,5 @@ func Wait() {
 		}
 	}
 
-	runDefer()
+	RunDefer()
 }

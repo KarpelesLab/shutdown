@@ -10,7 +10,7 @@ var (
 	// shutdownChannel is closed when shutdown is triggered
 	shutdownChannel = make(chan struct{})
 	// shutdownOnce ensures shutdown logic runs exactly once
-	shutdownOnce    sync.Once
+	shutdownOnce sync.Once
 )
 
 // Shutdown will trigger the normal shutdown of the program.
